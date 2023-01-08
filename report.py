@@ -17,26 +17,23 @@ def run():
     # GMV per Month
     data_month = run_transform(group_by='month')
 
-
-    plt.figure(figsize=(16,6))
+    fig1 =  plt.figure(figsize=(16,8))
     # Sales per Products
     plt.subplot(121)
     plt.title('Sales by Product')
     plt.bar(data_product['Product'], data_product['total_price'])
-    plt.yticks(data_product['total_price'])
     plt.xlabel('Top 3 Products')
     plt.ylabel('Total Sales (USD)')
-    
+
     # Sales per Month  
     plt.subplot(122)
     plt.title('Sales by Month')
     plt.bar(data_month['Order Date'].dt.month.astype(str), data_month['total_price'])
     plt.xlabel('Month')
     plt.ylabel('Total Sales (USD)')
-    plt.show()
 
     # Save graph ke image png
-    plt.savefig(file_bytes, bbox_inches='tight')
+    fig1.savefig(file_bytes, bbox_inches='tight')
 
     # send graph to slack channel
     message = "This is the Revenue per product performance"
